@@ -544,7 +544,7 @@ business.days = function(
 	# getHolidayList	
 	if( !is.null(calendar) ) {	  	
 		if( requireNamespace('RQuantLib', quietly = T) )
-			holidays = RQuantLib::getHolidayList(calendar, dates[1], last(dates))
+			holidays = RQuantLib::getHolidayList(calendar, dates[1], dates[len(dates)])
 		else
 			warning('RQuantLib could not be loaded')
 	}
@@ -693,8 +693,8 @@ map.spx.expiration <- function(data, backfill = T, offset = 0) {
   # 3rd Friday of the month is last trading day for equity options
   years = date.year(range(dates))
   friday = third.friday.month(years[1]:(years[2]+1), 1:12)
-    friday.future = friday[friday > last(dates)]
-    friday = friday[friday <= last(dates)]
+    friday.future = friday[friday > dates[len(dates)]]
+    friday = friday[friday <= dates[len(dates)]]
   
   key.date.index = match(friday, dates)
   na.index = which(is.na(key.date.index))

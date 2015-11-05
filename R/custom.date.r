@@ -51,8 +51,11 @@ custom.date = function(expr, dates) {
 	if( xts::is.xts(dates) ) dates = xts::index(dates)
 	dates = as.Date(dates)
 	
-	# split tokens with *in* or *every*
-	tokens = trim(spl(spl(tolower(expr), ' in '), ' every '))		
+	# split tokens with *in*, *every*, *of*, *of every*, *in every*
+	expr = gsub('the ', '', tolower(expr))
+	expr = gsub(' in every ', ' every ', expr)
+	expr = gsub(' of every ', ' every ', expr)	
+	tokens = trim(spl(spl(spl(expr, ' in '), ' every '), ' of '))
 	
 	stack = list(
 		splits = date.all(dates), 
