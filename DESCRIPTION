@@ -1,0 +1,16 @@
+Package: SIT.date
+Title: Wrappers for Common Date Operations
+Description: Wrappers for Common Date Operations
+Version: 0.1
+Authors@R: as.person("Systematic Investor <TheSystematicInvestor@gmail.com> [aut, cre]")
+URL: https://github.com/systematicinvestor/SIT.date
+Depends: R (>= 3.0)
+Imports:
+	stringr,
+	xts
+Suggests:
+	RQuantLib,
+	testthat,
+	rbenchmark,	
+License: GPL-3
+LazyData: true
