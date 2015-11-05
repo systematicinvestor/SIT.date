@@ -30,21 +30,27 @@ Let's checkout some examples:
 library(SIT.date)
 
 dates = seq(as.Date('1-Oct-2013','%d-%b-%Y'), as.Date('10-Jan-2015','%d-%b-%Y'), 1)
-out = function(x) print(format( x ,'%d-%b-%Y %a'))
+out = function(x) {
+	temp = matrix(format( x ,'%d-%b-%Y %a'),nc=1)
+		colnames(temp)='dates'
+	print(temp)
+}
 
 out( dates[date.ends(dates, 'bi-monthly')] )
 {% endhighlight %}
 
 
 
-31-Oct-2013 Thu
-31-Dec-2013 Tue
-28-Feb-2014 Fri
-30-Apr-2014 Wed
-30-Jun-2014 Mon
-29-Aug-2014 Fri
-31-Oct-2014 Fri
-31-Dec-2014 Wed
+|dates           |
+|:---------------|
+|31-Oct-2013 Thu |
+|31-Dec-2013 Tue |
+|28-Feb-2014 Fri |
+|30-Apr-2014 Wed |
+|30-Jun-2014 Mon |
+|29-Aug-2014 Fri |
+|31-Oct-2014 Fri |
+|31-Dec-2014 Wed |
     
 
 
@@ -56,14 +62,16 @@ out( dates[date.ends(dates, 'bi-monthly', skip=1)] )
 
 
 
-29-Nov-2013 Fri
-31-Jan-2014 Fri
-31-Mar-2014 Mon
-30-May-2014 Fri
-31-Jul-2014 Thu
-30-Sep-2014 Tue
-28-Nov-2014 Fri
-10-Jan-2015 Sat
+|dates           |
+|:---------------|
+|29-Nov-2013 Fri |
+|31-Jan-2014 Fri |
+|31-Mar-2014 Mon |
+|30-May-2014 Fri |
+|31-Jul-2014 Thu |
+|30-Sep-2014 Tue |
+|28-Nov-2014 Fri |
+|10-Jan-2015 Sat |
     
 
 
@@ -75,14 +83,16 @@ out( dates[date.ends(dates, 'monthly', skip=1, by=2)] )
 
 
 
-29-Nov-2013 Fri
-31-Jan-2014 Fri
-31-Mar-2014 Mon
-30-May-2014 Fri
-31-Jul-2014 Thu
-30-Sep-2014 Tue
-28-Nov-2014 Fri
-10-Jan-2015 Sat
+|dates           |
+|:---------------|
+|29-Nov-2013 Fri |
+|31-Jan-2014 Fri |
+|31-Mar-2014 Mon |
+|30-May-2014 Fri |
+|31-Jul-2014 Thu |
+|30-Sep-2014 Tue |
+|28-Nov-2014 Fri |
+|10-Jan-2015 Sat |
     
 
 We can also specify a calendar to only consider business dates:
@@ -96,15 +106,17 @@ out( dates[date.ends(dates, 'weekly', calendar = 'UnitedStates/NYSE')] )
 
 
 
-06-Mar-2015 Fri
-13-Mar-2015 Fri
-20-Mar-2015 Fri
-27-Mar-2015 Fri
-02-Apr-2015 Thu
-10-Apr-2015 Fri
-17-Apr-2015 Fri
-24-Apr-2015 Fri
-01-May-2015 Fri
+|dates           |
+|:---------------|
+|06-Mar-2015 Fri |
+|13-Mar-2015 Fri |
+|20-Mar-2015 Fri |
+|27-Mar-2015 Fri |
+|02-Apr-2015 Thu |
+|10-Apr-2015 Fri |
+|17-Apr-2015 Fri |
+|24-Apr-2015 Fri |
+|01-May-2015 Fri |
     
 
 
@@ -116,15 +128,17 @@ out( dates[date.ends(dates, 'weekly', last.date=F, calendar = 'Canada/TSX')] )
 
 
 
-06-Mar-2015 Fri
-13-Mar-2015 Fri
-20-Mar-2015 Fri
-27-Mar-2015 Fri
-02-Apr-2015 Thu
-10-Apr-2015 Fri
-17-Apr-2015 Fri
-24-Apr-2015 Fri
-01-May-2015 Fri
+|dates           |
+|:---------------|
+|06-Mar-2015 Fri |
+|13-Mar-2015 Fri |
+|20-Mar-2015 Fri |
+|27-Mar-2015 Fri |
+|02-Apr-2015 Thu |
+|10-Apr-2015 Fri |
+|17-Apr-2015 Fri |
+|24-Apr-2015 Fri |
+|01-May-2015 Fri |
     
 
 
@@ -137,15 +151,17 @@ out( dates[date.ends(dates, 'weekly')] )
 
 
 
-06-Mar-2015 Fri
-13-Mar-2015 Fri
-20-Mar-2015 Fri
-27-Mar-2015 Fri
-03-Apr-2015 Fri
-10-Apr-2015 Fri
-17-Apr-2015 Fri
-24-Apr-2015 Fri
-01-May-2015 Fri
+|dates           |
+|:---------------|
+|06-Mar-2015 Fri |
+|13-Mar-2015 Fri |
+|20-Mar-2015 Fri |
+|27-Mar-2015 Fri |
+|03-Apr-2015 Fri |
+|10-Apr-2015 Fri |
+|17-Apr-2015 Fri |
+|24-Apr-2015 Fri |
+|01-May-2015 Fri |
     
 
 
@@ -178,10 +194,12 @@ out( dates[custom.date('last day in Apr', dates)] )
 
 
 
-30-Apr-2011 Sat
-30-Apr-2012 Mon
-30-Apr-2013 Tue
-30-Apr-2014 Wed
+|dates           |
+|:---------------|
+|30-Apr-2011 Sat |
+|30-Apr-2012 Mon |
+|30-Apr-2013 Tue |
+|30-Apr-2014 Wed |
     
 
 
@@ -193,10 +211,12 @@ out( dates[custom.date.bus('last day in Apr', dates, 'UnitedStates/NYSE')] )
 
 
 
-29-Apr-2011 Fri
-30-Apr-2012 Mon
-30-Apr-2013 Tue
-30-Apr-2014 Wed
+|dates           |
+|:---------------|
+|29-Apr-2011 Fri |
+|30-Apr-2012 Mon |
+|30-Apr-2013 Tue |
+|30-Apr-2014 Wed |
     
 
 
@@ -208,6 +228,10 @@ dates = seq(as.Date('1-Oct-2014','%d-%b-%Y'), as.Date('1-Jan-2015','%d-%b-%Y'), 
 out( dates[custom.date.bus('first day in Jan', dates, 'UnitedStates/NYSE')] )
 {% endhighlight %}
 
+
+
+|dates |
+|:-----|
     
 
 
@@ -220,8 +244,10 @@ out( dates[custom.date('first day in Jan', dates)] )
 
 
 
-01-Jan-2014 Wed
-01-Jan-2015 Thu
+|dates           |
+|:---------------|
+|01-Jan-2014 Wed |
+|01-Jan-2015 Thu |
     
 
 
@@ -233,8 +259,10 @@ out( dates[custom.date.bus('first day in Jan', dates, 'UnitedStates/NYSE')] )
 
 
 
-02-Jan-2014 Thu
-02-Jan-2015 Fri
+|dates           |
+|:---------------|
+|02-Jan-2014 Thu |
+|02-Jan-2015 Fri |
     
 
 
@@ -247,8 +275,10 @@ out( dates[custom.date.bus('first day in Jan', dates)] )
 
 
 
-01-Jan-2014 Wed
-01-Jan-2015 Thu
+|dates           |
+|:---------------|
+|01-Jan-2014 Wed |
+|01-Jan-2015 Thu |
     
 
 
@@ -260,7 +290,9 @@ out( dates[custom.date('last day in Apr', dates)] )
 
 
 
-30-Apr-2014 Wed
+|dates           |
+|:---------------|
+|30-Apr-2014 Wed |
     
 
 
@@ -272,7 +304,9 @@ out( dates[custom.date('first day in Apr', dates)] )
 
 
 
-01-Apr-2014 Tue
+|dates           |
+|:---------------|
+|01-Apr-2014 Tue |
     
 
 
@@ -284,7 +318,9 @@ out( dates[custom.date('last day in first week in Apr', dates)] )
 
 
 
-05-Apr-2014 Sat
+|dates           |
+|:---------------|
+|05-Apr-2014 Sat |
     
 
 
@@ -296,7 +332,9 @@ out( dates[custom.date('last Mon in Apr', dates)] )
 
 
 
-28-Apr-2014 Mon
+|dates           |
+|:---------------|
+|28-Apr-2014 Mon |
     
 
 
@@ -308,7 +346,9 @@ out( dates[custom.date('last Fri in Apr', dates)] )
 
 
 
-25-Apr-2014 Fri
+|dates           |
+|:---------------|
+|25-Apr-2014 Fri |
     
 
 
@@ -320,7 +360,9 @@ out( dates[custom.date('first day in Apr', dates)] )
 
 
 
-01-Apr-2014 Tue
+|dates           |
+|:---------------|
+|01-Apr-2014 Tue |
     
 
 
@@ -332,7 +374,9 @@ out( dates[custom.date('1st day in Apr', dates)] )
 
 
 
-01-Apr-2014 Tue
+|dates           |
+|:---------------|
+|01-Apr-2014 Tue |
     
 
 
@@ -344,7 +388,9 @@ out( dates[custom.date('10th day in Apr', dates)] )
 
 
 
-10-Apr-2014 Thu
+|dates           |
+|:---------------|
+|10-Apr-2014 Thu |
     
 
 
@@ -356,7 +402,9 @@ out( dates[custom.date('50th day in Apr', dates)] )
 
 
 
-30-Apr-2014 Wed
+|dates           |
+|:---------------|
+|30-Apr-2014 Wed |
     
 
 
@@ -368,7 +416,9 @@ out( dates[custom.date('10th to last day in Apr', dates)] )
 
 
 
-20-Apr-2014 Sun
+|dates           |
+|:---------------|
+|20-Apr-2014 Sun |
     
 
 
@@ -380,11 +430,13 @@ out( dates[custom.date('3rd Mon in Q', dates)] )
 
 
 
-20-Jan-2014 Mon
-21-Apr-2014 Mon
-21-Jul-2014 Mon
-20-Oct-2014 Mon
-05-Jan-2015 Mon
+|dates           |
+|:---------------|
+|20-Jan-2014 Mon |
+|21-Apr-2014 Mon |
+|21-Jul-2014 Mon |
+|20-Oct-2014 Mon |
+|05-Jan-2015 Mon |
     
 
 
@@ -396,7 +448,9 @@ out( dates[custom.date('3rd Mon in 1st Q', dates)] )
 
 
 
-20-Jan-2014 Mon
+|dates           |
+|:---------------|
+|20-Jan-2014 Mon |
     
 
 
@@ -408,8 +462,10 @@ out( dates[custom.date('3rd Mon in Q1', dates)] )
 
 
 
-20-Jan-2014 Mon
-05-Jan-2015 Mon
+|dates           |
+|:---------------|
+|20-Jan-2014 Mon |
+|05-Jan-2015 Mon |
     
 
 
@@ -421,8 +477,10 @@ out( dates[custom.date('3rd Mon in last M in Q1', dates)] )
 
 
 
-17-Mar-2014 Mon
-05-Jan-2015 Mon
+|dates           |
+|:---------------|
+|17-Mar-2014 Mon |
+|05-Jan-2015 Mon |
     
 
 
@@ -436,11 +494,13 @@ out( dates[custom.date('3rd Fri in Q', dates)] )
 
 
 
-17-Jan-2014 Fri
-18-Apr-2014 Fri
-18-Jul-2014 Fri
-17-Oct-2014 Fri
-02-Jan-2015 Fri
+|dates           |
+|:---------------|
+|17-Jan-2014 Fri |
+|18-Apr-2014 Fri |
+|18-Jul-2014 Fri |
+|17-Oct-2014 Fri |
+|02-Jan-2015 Fri |
     
 
 
@@ -453,12 +513,14 @@ out( dates[custom.date('last day in Apr', dates)] )
 
 
 
-30-Apr-2010 Fri
-30-Apr-2011 Sat
-30-Apr-2012 Mon
-30-Apr-2013 Tue
-30-Apr-2014 Wed
-29-Apr-2015 Wed
+|dates           |
+|:---------------|
+|30-Apr-2010 Fri |
+|30-Apr-2011 Sat |
+|30-Apr-2012 Mon |
+|30-Apr-2013 Tue |
+|30-Apr-2014 Wed |
+|29-Apr-2015 Wed |
     
 
 
@@ -471,12 +533,14 @@ out( dates[custom.date('last day in Apr', dates)] )
 
 
 
-30-Apr-2010 Fri
-30-Apr-2011 Sat
-30-Apr-2012 Mon
-30-Apr-2013 Tue
-30-Apr-2014 Wed
-30-Apr-2015 Thu
+|dates           |
+|:---------------|
+|30-Apr-2010 Fri |
+|30-Apr-2011 Sat |
+|30-Apr-2012 Mon |
+|30-Apr-2013 Tue |
+|30-Apr-2014 Wed |
+|30-Apr-2015 Thu |
     
 
 
@@ -489,19 +553,22 @@ out( dates[custom.date.bus('last day in Apr', dates, 'UnitedStates/NYSE')] )
 
 
 
-30-Apr-2010 Fri
-29-Apr-2011 Fri
-30-Apr-2012 Mon
-30-Apr-2013 Tue
-30-Apr-2014 Wed
+|dates           |
+|:---------------|
+|30-Apr-2010 Fri |
+|29-Apr-2011 Fri |
+|30-Apr-2012 Mon |
+|30-Apr-2013 Tue |
+|30-Apr-2014 Wed |
     
 
-Please let me know if you run into any bugs.
+Please let me know if stumble upon any bugs.
 
-The [SIT.date](https://github.com/systematicinvestor/SIT.date) is available at [https://github.com/systematicinvestor/SIT.date](The [SIT.date](https://github.com/systematicinvestor/SIT.date) is available at [https://github.com/systematicinvestor/SIT.date](The [SIT.date](https://github.com/systematicinvestor/SIT.date) is available at [https://github.com/systematicinvestor/SIT.date](https://github.com/systematicinvestor/SIT.date)
+The [SIT.date](https://github.com/systematicinvestor/SIT.date) is available at 
+[github.com/systematicinvestor/SIT.date](https://github.com/systematicinvestor/SIT.date)
 
 Please install with `devtools::install_github('systematicinvestor/SIT.date')`
 
 
 
-*(this report was produced on: 2015-11-04)*
+*(this report was produced on: 2015-11-05)*
