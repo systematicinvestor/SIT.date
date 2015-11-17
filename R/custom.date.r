@@ -5,10 +5,18 @@ len = function(x) length(x)
 mlast = function(m, n=1) m[(nrow(m)-n+1), ,drop=F]
 spl = function(s, delim = ',') unlist(strsplit(s,delim))
 rep.row = function(m, nr) matrix(m, nr=nr, nc=len(m), byrow=T)
-trim <- function(s) {
+trim = function(s) {
   s = sub(pattern = '^\\s+', replacement = '', x = s)
   sub(pattern = '\\s+$', replacement = '', x = s)
-}  
+}
+index.xts = function(x) {
+  temp = attr(x, 'index')
+  class(temp) = c('POSIXct', 'POSIXt')  
+  type = attr(x, '.indexCLASS')[1]
+  if( type == 'Date' || type == 'yearmon' || type == 'yearqtr')
+    temp = as.Date(temp)
+  return(temp)
+}
 
 ###############################################################################
 #' Custom Date function with Business Date logic
@@ -48,7 +56,7 @@ custom.date.bus = function(expr, dates, calendar = NULL) {
 #' @export 
 ###############################################################################
 custom.date = function(expr, dates) {
-	if( xts::is.xts(dates) ) dates = xts::index(dates)
+	if( xts::is.xts(dates) ) dates = index(dates)
 	dates = as.Date(dates)
 	
 	# split tokens with *in*, *every*, *of*, *of every*, *in every*

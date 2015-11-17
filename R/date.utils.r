@@ -348,7 +348,7 @@ apply.business.days = function(dates, dates.fn = NULL, calendar = NULL, base = T
 	# assume that if xts is given; it is sourced from historical data and
 	# does not contain holidays; we just need to check boundary cases
 	if( xts::is.xts(dates) ) {
-		dates = xts::index(dates)
+		dates = index(dates)
 		apply.business.days.internal(dates, dates.fn, calendar)
 	} else {
 		ok.index = business.days(dates = dates, calendar = calendar, return.index=T)	
@@ -358,7 +358,7 @@ apply.business.days = function(dates, dates.fn = NULL, calendar = NULL, base = T
 }
 
 apply.business.days.internal = function(dates, dates.fn = NULL, calendar = NULL, base = T) {
-	if( xts::is.xts(dates) ) dates = xts::index(dates)
+	if( xts::is.xts(dates) ) dates = index(dates)
 	dates = as.Date(dates)
 		n = len(dates)
 
@@ -481,7 +481,7 @@ date.ends = function(dates, periodicity, by=1, skip=0, last.date=T, calendar = N
 				fn(x, last.date=F)		
 		})
 
-	if( xts::is.xts(dates) ) dates = xts::index(dates)		
+	if( xts::is.xts(dates) ) dates = index(dates)		
 	ends = ends.add.last.date(ends, len(dates), last.date)		
 				
 	if( skip > 0) ends = ends[-c(1:skip)]
@@ -537,7 +537,7 @@ business.days = function(
 	if( is.null(dates) ) 
 		dates = seq(as.Date(from), as.Date(to), 1)
 	else if( xts::is.xts(dates) ) 
-		dates = xts::index(dates)	
+		dates = index(dates)	
 		
     rm.index = date.dayofweek(dates) == 6 | date.dayofweek(dates) == 0
 
