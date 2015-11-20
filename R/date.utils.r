@@ -306,7 +306,7 @@ date.periodicity.map = function(periodicity) {
     yearly = 'years',
     annual = 'years',
     annually = 'years',
-	y = 'year',
+	y = 'years',
     
     # default
     NULL)  
