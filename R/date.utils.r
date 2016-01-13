@@ -349,11 +349,14 @@ apply.business.days = function(dates, dates.fn = NULL, calendar = NULL, base = T
 	# does not contain holidays; we just need to check boundary cases
 	if( xts::is.xts(dates) ) {
 		dates = index(dates)
-		apply.business.days.internal(dates, dates.fn, calendar)
+		apply.business.days.internal(dates, dates.fn, calendar, base)
 	} else {
 		ok.index = business.days(dates = dates, calendar = calendar, return.index=T)	
-		index = apply.business.days.internal(dates[ok.index], dates.fn, calendar)
-		(1:len(dates))[ok.index][index]
+		index = apply.business.days.internal(dates[ok.index], dates.fn, calendar, base)
+		if(base)
+			(1:len(dates))[ok.index][index]
+		else
+			index
 	}
 }
 
@@ -537,7 +540,8 @@ business.days = function(
 	if( is.null(dates) ) 
 		dates = seq(as.Date(from), as.Date(to), 1)
 	else if( xts::is.xts(dates) ) 
-		dates = index(dates)	
+		dates = index(dates)
+	dates = as.Date(dates)
 		
     rm.index = date.dayofweek(dates) == 6 | date.dayofweek(dates) == 0
 
