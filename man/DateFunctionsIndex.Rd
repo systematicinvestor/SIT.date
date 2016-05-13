@@ -2,6 +2,7 @@
 % Please edit documentation in R/date.utils.r
 \name{date.week.ends}
 \alias{date.end}
+\alias{date.ends.n}
 \alias{date.month.ends}
 \alias{date.quarter.ends}
 \alias{date.semiannual.ends}
@@ -21,6 +22,8 @@ date.year.ends(dates, last.date = T)
 
 date.end(date = Sys.Date(), periodicity = "months",
   date.format = "\%Y-\%m-\%d")
+
+date.ends.n(dates, n, start = 1, less = T, silent = T)
 }
 \arguments{
 \item{dates}{collection of dates}
@@ -35,6 +38,9 @@ Dates Index Functions
 
 last calendar day of period
 date.end('2014-01-13')
+
+index of dates apart by a given n
+one.year = date.ends.n(prices, 365)
 }
 \examples{
 \dontrun{

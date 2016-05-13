@@ -503,6 +503,31 @@ date.end <- function(date = Sys.Date(), periodicity = 'months', date.format = '%
   temp[date.ends.fn(periodicity)(temp)[1]]
 }
 
+#' index of dates apart by a given n
+#' one.year = date.ends.n(prices, 365)
+#' @export 
+#' @rdname DateFunctionsIndex 
+date.ends.n = function(dates, n, start=1, less = T, silent=T) {
+	if (xts::is.xts(dates))
+		dates = index(dates)
+	
+	days = cumsum(as.numeric(diff(dates)))	
+	
+	nperiods = len(dates)
+	periods = c(start)	
+	while( last(periods) < (nperiods-1) )
+		if(less)
+			periods = c(periods, last(which((days - days[last(periods)]) < n)))
+		else
+			periods = c(periods, 2 + last(which((days - days[last(periods)]) < n)))
+		
+	if(!less) periods[periods > nperiods] = nperiods
+	
+	if(!silent) 
+		if(less) print( max(diff(dates[periods])) )
+		else print( diff(dates[periods]) )
+	periods
+}
 
 ###############################################################################
 #' Extract Business Days
