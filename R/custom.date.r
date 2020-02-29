@@ -10,9 +10,9 @@ trim = function(s) {
   sub(pattern = '\\s+$', replacement = '', x = s)
 }
 index.xts = function(x) {
-  temp = attr(x, 'index')
+  temp = xts::.index(x)
   class(temp) = c('POSIXct', 'POSIXt')  
-  type = attr(x, '.indexCLASS')[1]
+  type = xts::tclass(x)[1]
   if( type == 'Date' || type == 'yearmon' || type == 'yearqtr')
     temp = as.Date(temp)
   return(temp)
